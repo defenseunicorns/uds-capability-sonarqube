@@ -35,7 +35,7 @@ components:
       - name: flux-app
         version: 1.0.5
         url: https://defenseunicorns.github.io/uds-support-charts/
-        namespace: bigbang
+        namespace: sonarqube
         valuesFiles:
           - sonarqube-flux-values.yaml
     images:
