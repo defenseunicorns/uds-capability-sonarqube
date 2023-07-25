@@ -14,6 +14,7 @@ variables:
 
 components:
   - name: sonarqube-values
+    required: true
     files:
       - source: values-sonarqube.yaml
         target: values-sonarqube.yaml
