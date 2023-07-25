@@ -9,4 +9,4 @@ application:
   values: |
     ###ZARF_VAR_SONARQUBE_VALUES###
   dependsOn:
-    ###ZARF_VAR_GITLAB_DEPENDS_ON###
+    ###ZARF_VAR_SONARQUBE_DEPENDS_ON###

@@ -25,15 +25,7 @@ networkPolicies:
 image:
   pullPolicy: IfNotPresent
   pullSecret: private-registry
-annotations:
-  bigbang.dev/istioVersion: 1.17.3
 postgresql:
-  master:
-    podAnnotations:
-      bigbang.dev/istioVersion: 1.17.3
-  slave:
-    podAnnotations:
-      bigbang.dev/istioVersion: 1.17.3
   # Use internal database, defaults are fine
   enabled: true
   service:
