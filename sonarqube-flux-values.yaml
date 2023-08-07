@@ -5,6 +5,7 @@ application:
   path: chart
   repository: https://repo1.dso.mil/big-bang/product/packages/sonarqube.git
   ref:
+    # renovate: datasource=gitlab-tags depName=big-bang/product/packages/sonarqube versioning=loose registryUrl=https://repo1.dso.mil
     tag: 8.0.1-bb.2
   values: |
     ###ZARF_VAR_SONARQUBE_VALUES###

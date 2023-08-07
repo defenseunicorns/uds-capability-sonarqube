@@ -32,9 +32,10 @@ components:
               autoIndent: true
               sensitive: true
     charts:
+      # renovate: datasource=helm
       - name: flux-app
-        version: 1.0.5
         url: https://defenseunicorns.github.io/uds-support-charts/
+        version: 1.0.5
         namespace: sonarqube
         valuesFiles:
           - sonarqube-flux-values.yaml
