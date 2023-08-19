@@ -3,7 +3,7 @@ kind: ZarfPackageConfig
 metadata:
   name: sonarqube
   description:  "UDS Sonarqube capability deployed via flux"
-  version: "0.0.3"
+  version: "0.0.4"
   architecture: amd64
 
 variables:
@@ -11,31 +11,27 @@ variables:
     default: "[]"
   - name: SONARQUBE_CREATE_NAMESPACE
     default: "true"
+  - name: SONARQUBE_DB
+    default: "sonarqubedb"
+  - name: DOMAIN
+    default: "bigbang.dev"
 
 components:
-  - name: sonarqube-values
+  - name: istio-version
     required: true
-    files:
-      - source: values-sonarqube.yaml
-        target: values-sonarqube.yaml
-  - name: sonarqube
-    required: true
-    description: "Deploy sonarqube via flux"
     actions:
       onDeploy:
         before:
-          - cmd: cat values-sonarqube.yaml
-            description: Read sonarqube values into variable.
-            mute: true
-            setVariables:
-            - name: SONARQUBE_VALUES
-              autoIndent: true
-              sensitive: true
+          - cmd: kubectl get deployment -n monitoring monitoring-monitoring-kube-operator -o=jsonpath='{.spec.template.metadata.annotations.bigbang\.dev/istioVersion}'
+            setVariable: ISTIO_VERSION
+  - name: sonarqube
+    required: true
+    description: "Deploy sonarqube via flux"
     charts:
       # renovate: datasource=helm
       - name: flux-app
         url: https://defenseunicorns.github.io/uds-support-charts/
-        version: 1.0.5
+        version: 1.0.7
         namespace: sonarqube
         valuesFiles:
           - sonarqube-flux-values.yaml
