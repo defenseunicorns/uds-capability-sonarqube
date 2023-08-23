@@ -1,7 +1,9 @@
 # uds-capability-sonarqube
+
 Platform One Sonarqube deployed via flux
 
 ## Pre-req
+
 - Minimum compute requirements for single node deployment are at LEAST 64 GB RAM and 32 virtual CPU threads (aws `m6i.8xlarge` instance type should do)
 - k3d installed on machine
 
@@ -37,6 +39,7 @@ make cluster/full
 ```
 
 ## Import Zarf Skeleton
+
 Below is an example of how to import this projects zarf skeleton into your zarf.yaml. The [uds-package-sofware-factory](https://github.com/defenseunicorns/uds-package-software-factory.git) does this with a subset of the uds-capability projects.
 
 ```yaml
@@ -50,5 +53,25 @@ components:
     required: true
     import:
       name: sonarqube
-      url: oci://ghcr.io/defenseunicorns/uds-capability/nexus:0.0.3-skeleton
+      url: oci://ghcr.io/defenseunicorns/uds-capability/sonarqube:0.0.4-skeleton
 ```
+
+## Prerequisites
+
+### SonarQube Capability
+
+The SonarQube Capability expects the database listed below to exist in the cluster before being deployed.
+
+#### General
+
+- Create `sonarqube` namespace
+- Label `sonarqube` namespace with `istio-injection: enabled`
+
+#### Database
+
+- A Postgres database is running on port `5432` and accessible to the cluster
+- This database can be logged into via the username `sonarqube`
+- This database instance has a psql database created matching what is defined in the deploy time variable `SONARQUBE_DB`. Default is `sonarqubedb`
+- The `sonarqube` user has read/write access to above mentioned database
+- Create `sonarqube-postgres` service in `sonarqube` namespace that points to the psql database
+- Create `sonarqube-postgres` secret in `sonarqube` namespace with the key `password` that contains the password to the `sonarqube` user for the psql database

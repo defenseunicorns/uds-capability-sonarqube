@@ -8,7 +8,7 @@ BUILD_HARNESS_REPO := ghcr.io/defenseunicorns/build-harness/build-harness
 # renovate: datasource=docker depName=ghcr.io/defenseunicorns/build-harness/build-harness
 BUILD_HARNESS_VERSION := 1.10.2
 # renovate: datasource=docker depName=ghcr.io/defenseunicorns/packages/dubbd-k3d extractVersion=^(?<version>\d+\.\d+\.\d+)
-DUBBD_K3D_VERSION := 0.6.1
+DUBBD_K3D_VERSION := 0.6.2
 
 # Figure out which Zarf binary we should use based on the operating system we are on
 ZARF_BIN := zarf
@@ -119,8 +119,15 @@ test-ssh: ## Run this if you set SKIP_TEARDOWN=1 and want to SSH into the still-
 cluster/full: cluster/destroy cluster/create build/all deploy/all ## This will destroy any existing cluster, create a new one, then build and deploy all
 
 cluster/create: ## Create a k3d cluster with metallb installed
-	k3d cluster create k3d-test-cluster --config utils/k3d/k3d-config.yaml -v /etc/machine-id:/etc/machine-id@server:*
+	K3D_FIX_MOUNTS=1 k3d cluster create k3d-test-cluster --config utils/k3d/k3d-config.yaml
 	k3d kubeconfig merge k3d-test-cluster -o /home/${USER}/cluster-kubeconfig.yaml
+	echo "Installing Calico..."
+	kubectl apply --wait=true -f utils/calico/calico.yaml 2>&1 >/dev/null
+	echo "Waiting for Calico to be ready..."
+	kubectl rollout status deployment/calico-kube-controllers -n kube-system --watch --timeout=90s 2>&1 >/dev/null
+	kubectl rollout status daemonset/calico-node -n kube-system --watch --timeout=90s 2>&1 >/dev/null
+	kubectl wait --for=condition=Ready pods --all --all-namespaces 2>&1 >/dev/null
+	echo
 	utils/metallb/install.sh
 	echo "Cluster is ready!"
 
@@ -131,7 +138,7 @@ cluster/destroy: ## Destroy the k3d cluster
 # Build Section
 ########################################################################
 
-build/all: build build/zarf build/zarf-init.sha256 build/dubbd-pull-k3d.sha256 build/uds-capability-sonarqube ##
+build/all: build build/zarf build/zarf-init.sha256 build/dubbd-pull-k3d.sha256 build/test-pkg-deps build/uds-capability-sonarqube ##
 
 build: ## Create build directory
 	mkdir -p build
@@ -161,6 +168,10 @@ build/dubbd-pull-k3d.sha256: | build ## Download dubbd k3d oci package
 	echo "Creating shasum of the dubbd-k3d package"
 	shasum -a 256 build/zarf-package-dubbd-k3d-amd64-$(DUBBD_K3D_VERSION).tar.zst | awk '{print $$1}' > build/dubbd-pull-k3d.sha256
 
+build/test-pkg-deps: | build ## Build package dependencies for testing
+	build/zarf package create utils/pkg-deps/namespaces/ --skip-sbom --confirm --output-directory build
+	build/zarf package create utils/pkg-deps/sonarqube/postgres --skip-sbom --confirm --output-directory build
+
 build/uds-capability-sonarqube: | build ## Build the sonarqube capability
 	build/zarf package create . --skip-sbom --confirm --output-directory build
 
@@ -168,7 +179,7 @@ build/uds-capability-sonarqube: | build ## Build the sonarqube capability
 # Deploy Section
 ########################################################################
 
-deploy/all: deploy/init deploy/dubbd-k3d deploy/uds-capability-sonarqube ##
+deploy/all: deploy/init deploy/dubbd-k3d deploy/test-pkg-deps deploy/uds-capability-sonarqube ##
 
 deploy/init: ## Deploy the zarf init package
 	./build/zarf init --confirm --components=git-server
@@ -176,5 +187,9 @@ deploy/init: ## Deploy the zarf init package
 deploy/dubbd-k3d: ## Deploy the k3d flavor of DUBBD
 	cd ./build && ./zarf package deploy zarf-package-dubbd-k3d-amd64-$(DUBBD_K3D_VERSION).tar.zst --confirm
 
+deploy/test-pkg-deps: ## Deploy the package dependencies needed for testing the gitlab capability
+	cd ./build && ./zarf package deploy zarf-package-sonarqube-namespaces-* --confirm
+	cd ./build && ./zarf package deploy zarf-package-sonarqube-postgres* --confirm
+
 deploy/uds-capability-sonarqube: ## Deploy the sonarqube capability
-	cd ./build && ./zarf package deploy zarf-package-sonarqube-*.tar.zst --confirm
+	cd ./build && ./zarf package deploy zarf-package-sonarqube-amd*.tar.zst --confirm
