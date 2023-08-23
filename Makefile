@@ -188,7 +188,7 @@ deploy/dubbd-k3d: ## Deploy the k3d flavor of DUBBD
 	cd ./build && ./zarf package deploy zarf-package-dubbd-k3d-amd64-$(DUBBD_K3D_VERSION).tar.zst --confirm
 
 deploy/test-pkg-deps: ## Deploy the package dependencies needed for testing the gitlab capability
-	cd ./build && ./zarf package deploy zarf-package-swf-namespaces-* --confirm
+	cd ./build && ./zarf package deploy zarf-package-sonarqube-namespaces-* --confirm
 	cd ./build && ./zarf package deploy zarf-package-sonarqube-postgres* --confirm
 
 deploy/uds-capability-sonarqube: ## Deploy the sonarqube capability
