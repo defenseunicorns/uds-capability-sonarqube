@@ -53,7 +53,7 @@ components:
     required: true
     import:
       name: sonarqube
-      url: oci://ghcr.io/defenseunicorns/uds-capability/nexus:0.0.3-skeleton
+      url: oci://ghcr.io/defenseunicorns/uds-capability/sonarqube:0.0.4-skeleton
 ```
 
 ## Prerequisites
