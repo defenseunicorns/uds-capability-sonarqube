@@ -47,9 +47,9 @@ jobs:
           username: ${{ secrets.REGISTRY1_USERNAME }}
           password: ${{ secrets.REGISTRY1_PASSWORD }}
 
-      - name: Build sonarqube package
-        run: zarf package create --confirm --no-progress
-
+      ####
+      # Build and publish dependency packages to use in a dev UDS Bundle
+      ####
       - name: Build dev-dependency sonarqube namespace package
         run: cd uds-capability-sonarqube/utils/pkg-deps/namespaces && zarf package create --confirm --no-progress
 
@@ -61,6 +61,12 @@ jobs:
 
       - name: Publish dev-dependency sonarqube postgres package
         run: cd uds-capability-sonarqube/utils/pkg-deps/sonarqube/postgres && zarf package publish zarf-package-sonarqube-postgres-amd64-*.tar.zst oci://ghcr.io/defenseunicorns/uds-capability/sonarqube/dev-dependency --no-progress
+
+      ####
+      # Build and publish capability package and skeleton
+      ####
+      - name: Build sonarqube package
+        run: zarf package create --confirm --no-progress
 
       - name: Publish sonarqube package
         run: zarf package publish zarf-package-sonarqube-amd64-*.tar.zst oci://ghcr.io/defenseunicorns/uds-capability --no-progress
