@@ -50,14 +50,9 @@ jobs:
       ####
       # Build and publish dependency packages to use in a dev UDS Bundle
       ####
-      - name: Build dev-dependency sonarqube namespace package
-        run: cd utils/pkg-deps/namespaces && zarf package create --confirm --no-progress
 
       - name: Build dev-dependency sonarqube postgres package
         run: cd utils/pkg-deps/sonarqube/postgres && zarf package create --confirm --no-progress
-
-      - name: Publish dev-dependency sonarqube namespace package
-        run: cd utils/pkg-deps/namespaces && zarf package publish zarf-package-sonarqube-namespaces-amd64-*.tar.zst oci://ghcr.io/defenseunicorns/uds-capability/sonarqube/dev-dependency --no-progress
 
       - name: Publish dev-dependency sonarqube postgres package
         run: cd utils/pkg-deps/sonarqube/postgres && zarf package publish zarf-package-sonarqube-postgres-amd64-*.tar.zst oci://ghcr.io/defenseunicorns/uds-capability/sonarqube/dev-dependency --no-progress
