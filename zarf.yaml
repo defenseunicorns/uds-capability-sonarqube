@@ -11,8 +11,6 @@ variables:
     default: "[]"
   - name: SONARQUBE_CREATE_NAMESPACE
     default: "true"
-  - name: SONARQUBE_DB
-    default: "sonarqubedb"
   - name: DOMAIN
     default: "bigbang.dev"
 
