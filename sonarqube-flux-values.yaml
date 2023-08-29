@@ -72,7 +72,7 @@ application:
 
     jdbcOverwrite:
       enable: true
-      jdbcUrl: jdbc:postgresql://postgresql.sonarqube-db.svc.cluster.local:5432/###ZARF_VAR_SONARQUBE_DB###
+      jdbcUrl: jdbc:postgresql://sonarqube-postgres.sonarqube.svc.cluster.local:5432/###ZARF_VAR_SONARQUBE_DB###
       jdbcUsername: sonarqube
       jdbcSecretName: sonarqube-postgres
       jdbcSecretPasswordKey: password
