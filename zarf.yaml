@@ -3,7 +3,7 @@ kind: ZarfPackageConfig
 metadata:
   name: sonarqube
   description:  "UDS Sonarqube capability deployed via flux"
-  version: "0.0.4"
+  version: "0.0.5"
   architecture: amd64
 
 variables:
@@ -39,3 +39,14 @@ components:
     - "registry1.dso.mil/ironbank/big-bang/base:2.0.0"
     - "registry1.dso.mil/ironbank/big-bang/sonarqube-9:9.9.1-community"
     - "registry1.dso.mil/ironbank/opensource/postgres/postgresql12:12.15"
+    actions:
+      onDeploy:
+        after:
+          - wait:
+              cluster:
+                kind: helmRelease
+                name: sonarqube
+                condition: Ready
+                namespace: bigbang
+            maxRetries: 3
+            description: SonarQube HelmRelease to be Ready
