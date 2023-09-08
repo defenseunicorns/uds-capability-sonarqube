@@ -24,6 +24,16 @@ jobs:
           path: "~/.zarf-cache"
           key: zarf-cache
 
+      - name: Free GH runner build space
+        run: |
+          df -h
+          sudo rm -rf /usr/share/dotnet
+          sudo rm -rf /usr/local/lib/android
+          sudo rm -rf /opt/ghc
+          sudo rm -rf /opt/hostedtoolcache/CodeQL
+          sudo docker image prune --all --force
+          df -h
+
       - name: Install zarf
         uses: supplypike/setup-bin@v3
         with:
@@ -51,20 +61,14 @@ jobs:
       # Build and publish dependency packages to use in a dev UDS Bundle
       ####
 
-      - name: Build dev-dependency sonarqube postgres package
-        run: cd utils/pkg-deps/sonarqube/postgres && zarf package create --confirm --no-progress
-
-      - name: Publish dev-dependency sonarqube postgres package
-        run: cd utils/pkg-deps/sonarqube/postgres && zarf package publish zarf-package-sonarqube-postgres-amd64-*.tar.zst oci://ghcr.io/defenseunicorns/uds-capability/sonarqube/dev-dependency --no-progress
+      - name: Build and publish dev-dependency sonarqube postgres package
+        run: cd utils/pkg-deps/sonarqube/postgres && zarf package create --confirm --no-progress --output oci://ghcr.io/defenseunicorns/uds-capability/sonarqube/dev-dependency
 
       ####
       # Build and publish capability package and skeleton
       ####
-      - name: Build sonarqube package
-        run: zarf package create --confirm --no-progress
-
-      - name: Publish sonarqube package
-        run: zarf package publish zarf-package-sonarqube-amd64-*.tar.zst oci://ghcr.io/defenseunicorns/uds-capability --no-progress
+      - name: Build and publish sonarqube package
+        run: zarf package create --confirm --no-progress --output oci://ghcr.io/defenseunicorns/uds-capability
 
       - name: Publish sonarqube skeleton
         run: zarf package publish . oci://ghcr.io/defenseunicorns/uds-capability
