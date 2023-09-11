@@ -3,7 +3,7 @@ kind: ZarfPackageConfig
 metadata:
   name: sonarqube
   description:  "UDS Sonarqube capability deployed via flux"
-  version: "0.0.5"
+  version: "0.0.6"
   architecture: amd64
 
 variables:
@@ -48,5 +48,5 @@ components:
                 name: sonarqube
                 condition: Ready
                 namespace: bigbang
-            maxRetries: 3
+            maxTotalSeconds: 900
             description: SonarQube HelmRelease to be Ready
