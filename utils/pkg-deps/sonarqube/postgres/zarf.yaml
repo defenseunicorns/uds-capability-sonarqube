@@ -44,6 +44,7 @@ components:
               - name: DB_PASSWORD
                 sensitive: true
         after:
+          - cmd: kubectl delete secret sonarqube-postgres -n sonarqube 2>&1 || true
           - cmd: kubectl create secret generic sonarqube-postgres -n sonarqube --from-literal=password=${ZARF_VAR_DB_PASSWORD}
   - name: postgres-service
     required: true
