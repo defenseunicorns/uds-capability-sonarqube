@@ -5,12 +5,6 @@ metadata:
   version: "0.0.1"
   architecture: amd64
 
-variables:
-  - name: POSTGRES_DB_PASSWORD
-    default: ""
-    prompt: false
-    autoIndent: true
-
 components:
   - name: postgres-kyverno-exceptions
     required: true
@@ -49,13 +43,11 @@ components:
             setVariables:
               - name: POSTGRES_DB_PASSWORD
                 sensitive: true
-        # after:
-        #   - cmd: kubectl delete secret sonarqube-postgres -n sonarqube 2>&1 || true
-        #   - cmd: kubectl create secret generic sonarqube-postgres -n sonarqube --from-literal=password=${ZARF_VAR_DB_PASSWORD}
   - name: sonarqube-postgres-password
     required: true
     manifests:
       - name: sonarqube-postgres
+        namespace: sonarqube
         files:
           - secret.yaml
   - name: postgres-service
