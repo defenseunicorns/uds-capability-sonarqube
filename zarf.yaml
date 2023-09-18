@@ -3,7 +3,7 @@ kind: ZarfPackageConfig
 metadata:
   name: sonarqube
   description:  "UDS Sonarqube capability deployed via flux"
-  version: "0.0.6"
+  version: "0.0.7"
   architecture: amd64
 
 variables:
@@ -38,7 +38,6 @@ components:
     images:
     - "registry1.dso.mil/ironbank/big-bang/base:2.0.0"
     - "registry1.dso.mil/ironbank/big-bang/sonarqube-9:9.9.1-community"
-    - "registry1.dso.mil/ironbank/opensource/postgres/postgresql12:12.15"
     actions:
       onDeploy:
         after:
