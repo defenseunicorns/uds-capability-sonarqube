@@ -3,7 +3,7 @@ kind: ZarfPackageConfig
 metadata:
   name: sonarqube
   description:  "UDS Sonarqube capability deployed via flux"
-  version: "0.0.7"
+  version: "0.0.8"
   architecture: amd64
 
 variables:
@@ -13,6 +13,24 @@ variables:
     default: "true"
   - name: DOMAIN
     default: "bigbang.dev"
+  - name: IDAM_ENABLED
+    default: "false"
+  - name: IDAM_CLIENT_ID
+    default: ""
+  - name: IDAM_PROVIDER_NAME
+    default: ""
+  - name: IDAM_REALM_URL
+    default: ""
+  - name: IDAM_SAML_CERT
+    default: ""
+  - name: IDAM_ATTR_LOGIN
+    default: ""
+  - name: IDAM_ATTR_NAME
+    default: ""
+  - name: IDAM_ATTR_EMAIL
+    default: ""
+  - name: IDAM_ATTR_GROUP
+    default: ""
 
 components:
   - name: istio-version

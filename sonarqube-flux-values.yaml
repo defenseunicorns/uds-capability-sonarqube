@@ -18,6 +18,19 @@ application:
     OpenShift:
       enabled: false
 
+    sonarProperties:
+      sonar.auth.saml.enabled: ###ZARF_VAR_IDAM_ENABLED###
+      sonar.core.serverBaseURL: https://sonarqube.###ZARF_VAR_DOMAIN###
+      sonar.auth.saml.applicationId: ###ZARF_VAR_IDAM_CLIENT_ID###
+      sonar.auth.saml.providerName: ###ZARF_VAR_IDAM_PROVIDER_NAME###
+      sonar.auth.saml.providerId: ###ZARF_VAR_IDAM_REALM_URL###
+      sonar.auth.saml.loginUrl: ###ZARF_VAR_IDAM_REALM_URL###/protocol/saml
+      sonar.auth.saml.certificate.secured: ###ZARF_VAR_IDAM_SAML_CERT###
+      sonar.auth.saml.user.login: ###ZARF_VAR_IDAM_ATTR_LOGIN###
+      sonar.auth.saml.user.name: ###ZARF_VAR_IDAM_ATTR_NAME###
+      sonar.auth.saml.user.email: ###ZARF_VAR_IDAM_ATTR_EMAIL###
+      sonar.auth.saml.group.name: ###ZARF_VAR_IDAM_ATTR_GROUP###
+
     istio:
       enabled: true
       sonarqube:

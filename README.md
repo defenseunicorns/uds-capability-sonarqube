@@ -75,3 +75,7 @@ The SonarQube Capability expects the database listed below to exist in the clust
 - The `sonarqube` user has read/write access to above mentioned database
 - Create `sonarqube-postgres` service in `sonarqube` namespace that points to the psql database
 - Create `sonarqube-postgres` secret in `sonarqube` namespace with the key `password` that contains the password to the `sonarqube` user for the psql database
+
+## Documentation
+
+[Identity and Access Management](docs/idam.md)
