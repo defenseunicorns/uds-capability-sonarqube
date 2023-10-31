@@ -10,7 +10,7 @@ variables:
   - name: SONARQUBE_DEPENDS_ON
     default: "[]"
   - name: SONARQUBE_CREATE_NAMESPACE
-    default: "true"
+    default: "false"
   - name: DOMAIN
     default: "bigbang.dev"
   - name: SONARQUBE_IDAM_ENABLED
