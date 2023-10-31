@@ -70,11 +70,11 @@ The SonarQube Capability expects the database listed below to exist in the clust
 #### Database
 
 - A Postgres database is running on port `5432` and accessible to the cluster
-- This database can be logged into via the username `sonarqube`
-- This database instance has a psql database created named `sonarqubedb`
-- The `sonarqube` user has read/write access to above mentioned database
+- This database can be logged into via the username configured with the zarf var `SONARQUBE_DB_USERNAME`. Default is `sonarqube`
+- This database instance has a psql database created and configured with zarf var `SONARQUBE_DB_NAME`. Default is `sonarqubedb`
+- The user has read/write access to above mentioned database
 - Create `sonarqube-postgres` service in `sonarqube` namespace that points to the psql database
-- Create `sonarqube-postgres` secret in `sonarqube` namespace with the key `password` that contains the password to the `sonarqube` user for the psql database
+- Create `sonarqube-postgres` secret in `sonarqube` namespace with the key `password` that contains the password to the user for the psql database
 
 ## Documentation
 

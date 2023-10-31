@@ -103,6 +103,6 @@ application:
       existingSecret: "sonarqube-postgres"
       existingSecretPasswordKey: "password"
       postgresqlUsername: ###ZARF_VAR_SONARQUBE_DB_USERNAME###
-      postgresqlDatabase: "sonarqubedb"
+      postgresqlDatabase: ###ZARF_VAR_SONARQUBE_DB_NAME###
       service:
         port: 5432
