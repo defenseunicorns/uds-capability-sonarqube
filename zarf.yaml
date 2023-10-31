@@ -31,6 +31,8 @@ variables:
     default: ""
   - name: SONARQUBE_IDAM_ATTR_GROUP
     default: ""
+  - name: SONARQUBE_DB_USERNAME
+    default: "sonarqube"
 
 components:
   - name: istio-version
