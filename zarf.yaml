@@ -3,14 +3,14 @@ kind: ZarfPackageConfig
 metadata:
   name: sonarqube
   description:  "UDS Sonarqube capability deployed via flux"
-  version: "0.0.10"
+  version: "0.0.11"
   architecture: amd64
 
 variables:
   - name: SONARQUBE_DEPENDS_ON
     default: "[]"
   - name: SONARQUBE_CREATE_NAMESPACE
-    default: "true"
+    default: "false"
   - name: DOMAIN
     default: "bigbang.dev"
   - name: SONARQUBE_IDAM_ENABLED
@@ -31,6 +31,8 @@ variables:
     default: ""
   - name: SONARQUBE_IDAM_ATTR_GROUP
     default: ""
+  - name: SONARQUBE_DB_USERNAME
+    default: "sonarqube"
 
 components:
   - name: istio-version
@@ -52,9 +54,9 @@ components:
         valuesFiles:
           - sonarqube-flux-values.yaml
     repos:
-      - https://repo1.dso.mil/big-bang/product/packages/sonarqube.git@8.0.1-bb.4
+      - https://repo1.dso.mil/big-bang/product/packages/sonarqube.git@8.0.2-bb.1
     images:
-    - "registry1.dso.mil/ironbank/big-bang/sonarqube-9:9.9.1-community"
+    - "registry1.dso.mil/ironbank/big-bang/sonarqube-9:9.9.2-community"
     - "registry1.dso.mil/ironbank/big-bang/base:2.0.0"
     actions:
       onDeploy:

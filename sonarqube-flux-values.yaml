@@ -6,7 +6,7 @@ application:
   repository: https://repo1.dso.mil/big-bang/product/packages/sonarqube.git
   ref:
     # renovate: datasource=gitlab-tags depName=big-bang/product/packages/sonarqube versioning=loose registryUrl=https://repo1.dso.mil
-    tag: 8.0.1-bb.4
+    tag: 8.0.2-bb.1
   dependsOn:
     ###ZARF_VAR_SONARQUBE_DEPENDS_ON###
   baseValues:
@@ -86,7 +86,7 @@ application:
     jdbcOverwrite:
       enable: true
       jdbcUrl: jdbc:postgresql://sonarqube-postgres.sonarqube.svc.cluster.local:5432/sonarqubedb
-      jdbcUsername: sonarqube
+      jdbcUsername: ###ZARF_VAR_SONARQUBE_DB_USERNAME###
       jdbcSecretName: sonarqube-postgres
       jdbcSecretPasswordKey: password
 
@@ -102,7 +102,7 @@ application:
       postgresqlServer: sonarqube-postgres
       existingSecret: "sonarqube-postgres"
       existingSecretPasswordKey: "password"
-      postgresqlUsername: "sonarqube"
+      postgresqlUsername: ###ZARF_VAR_SONARQUBE_DB_USERNAME###
       postgresqlDatabase: "sonarqubedb"
       service:
         port: 5432
