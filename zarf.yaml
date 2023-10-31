@@ -52,9 +52,9 @@ components:
         valuesFiles:
           - sonarqube-flux-values.yaml
     repos:
-      - https://repo1.dso.mil/big-bang/product/packages/sonarqube.git@8.0.1-bb.4
+      - https://repo1.dso.mil/big-bang/product/packages/sonarqube.git@8.0.2-bb.1
     images:
-    - "registry1.dso.mil/ironbank/big-bang/sonarqube-9:9.9.1-community"
+    - "registry1.dso.mil/ironbank/big-bang/sonarqube-9:9.9.2-community"
     - "registry1.dso.mil/ironbank/big-bang/base:2.0.0"
     actions:
       onDeploy:
