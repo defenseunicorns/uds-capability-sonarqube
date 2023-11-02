@@ -2,7 +2,7 @@ apiVersion: kyverno.io/v2alpha1
 kind: PolicyException
 metadata:
   name: sonarqube-postgres-external-names-exception
-  namespace: sonarqube
+  namespace: kyverno
 spec:
   exceptions:
   - policyName: restrict-external-names

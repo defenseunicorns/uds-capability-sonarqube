@@ -2,7 +2,7 @@ apiVersion: kyverno.io/v2alpha1
 kind: PolicyException
 metadata:
   name: sonarqube-postgres-registry-exception
-  namespace: sonarqube-db
+  namespace: kyverno
 spec:
   exceptions:
   - policyName: restrict-image-registries
