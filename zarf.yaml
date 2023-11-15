@@ -3,7 +3,7 @@ kind: ZarfPackageConfig
 metadata:
   name: sonarqube
   description:  "UDS Sonarqube capability deployed via flux"
-  version: "0.0.12"
+  version: "0.0.13"
   architecture: amd64
 
 variables:
@@ -56,10 +56,10 @@ components:
         valuesFiles:
           - sonarqube-flux-values.yaml
     repos:
-      - https://repo1.dso.mil/big-bang/product/packages/sonarqube.git@8.0.2-bb.1
+      - https://repo1.dso.mil/big-bang/product/packages/sonarqube.git@8.0.2-bb.2
     images:
-    - "registry1.dso.mil/ironbank/big-bang/sonarqube-9:9.9.2-community"
-    - "registry1.dso.mil/ironbank/big-bang/base:2.0.0"
+      - "registry1.dso.mil/ironbank/big-bang/sonarqube-9:9.9.2-community"
+      - "registry1.dso.mil/ironbank/big-bang/base:2.0.0"
     actions:
       onDeploy:
         after:
