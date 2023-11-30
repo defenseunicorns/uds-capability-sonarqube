@@ -23,11 +23,6 @@ export REGISTRY1_USERNAME="YOUR-USERNAME-HERE"
 export REGISTRY1_TOKEN="YOUR-TOKEN-HERE"
 echo $REGISTRY1_TOKEN | build/zarf tools registry login registry1.dso.mil --username $REGISTRY1_USERNAME --password-stdin
 
-# ghcr.io (To access oci packages needed)
-export GH_USERNAME="YOUR-USERNAME-HERE"
-export GH_TOKEN="YOUR-TOKEN-HERE"
-echo $GH_TOKEN | build/zarf tools registry login ghcr.io --username $GH_USERNAME --password-stdin
-
 set -o history
 ```
 
@@ -53,7 +48,7 @@ components:
     required: true
     import:
       name: sonarqube
-      url: oci://ghcr.io/defenseunicorns/uds-capability/sonarqube:0.0.4-skeleton
+      url: oci://ghcr.io/defenseunicorns/uds-capability/sonarqube:x.x.x-skeleton
 ```
 
 ## Prerequisites
