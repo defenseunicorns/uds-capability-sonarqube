@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.3](https://github.com/defenseunicorns/uds-capability-sonarqube/compare/v0.1.2...v0.1.3) (2024-01-08)
+
+
+### Features
+
+* add initial oscal component definition file ([#33](https://github.com/defenseunicorns/uds-capability-sonarqube/issues/33)) ([d1f4efd](https://github.com/defenseunicorns/uds-capability-sonarqube/commit/d1f4efd041158b3203be0e9edc423b6001de2c64))
+
+
+### Miscellaneous
+
+* Update Sonarqube to 8.0.3-bb-0 ([0fd6423](https://github.com/defenseunicorns/uds-capability-sonarqube/commit/0fd64238d01bd96560a9683d9fb06f2c30a4d40b))
+
 ## [0.1.2](https://github.com/defenseunicorns/uds-capability-sonarqube/compare/v0.1.1...v0.1.2) (2023-12-01)
 
 
