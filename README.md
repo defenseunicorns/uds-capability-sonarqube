@@ -44,7 +44,7 @@ metadata:
   version: 0.0.1
   architecture: amd64
 
-zarf-packages:
+packages:
   # Sonarqube
   - name: sonarqube
     repository: ghcr.io/defenseunicorns/uds-capability/sonarqube
