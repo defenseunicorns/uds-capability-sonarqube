@@ -1,6 +1,6 @@
-# IDAM integration with uds-capability-sonarqube
+# IDAM integration with uds-package-sonarqube
 
-The sonarqube capability is preconfigured to work with an IDAM solution, but IDAM is disabled by default.
+The sonarqube package is preconfigured to work with an IDAM solution, but IDAM is disabled by default.
 
 ## IDAM Variables
 

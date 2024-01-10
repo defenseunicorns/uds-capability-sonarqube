@@ -1,7 +1,0 @@
-namespaces:
-  - name: sonarqube
-    labels:
-      istio-injection: enabled
-  - name: sonarqube-db
-    labels:
-      istio-injection: enabled
