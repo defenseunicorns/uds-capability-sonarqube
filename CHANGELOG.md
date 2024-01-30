@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.1.4](https://github.com/defenseunicorns/uds-capability-sonarqube/compare/v0.1.3...v0.1.4) (2024-01-30)
+
+
+### Features
+
+* add initial lula lint action ([#37](https://github.com/defenseunicorns/uds-capability-sonarqube/issues/37)) ([db097fd](https://github.com/defenseunicorns/uds-capability-sonarqube/commit/db097fdc576aee41709b073564bcc15adebb1e37))
+
+
+### Miscellaneous
+
+* update zarf and dubbd ([#39](https://github.com/defenseunicorns/uds-capability-sonarqube/issues/39)) ([db63259](https://github.com/defenseunicorns/uds-capability-sonarqube/commit/db63259a72786a836661c6e2a5c04aa301a85e2a))
+
 ## [0.1.3](https://github.com/defenseunicorns/uds-capability-sonarqube/compare/v0.1.2...v0.1.3) (2024-01-08)
 
 
