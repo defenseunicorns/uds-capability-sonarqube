@@ -6,7 +6,7 @@ application:
   repository: https://repo1.dso.mil/big-bang/product/packages/sonarqube.git
   ref:
     # renovate: datasource=gitlab-tags depName=big-bang/product/packages/sonarqube versioning=loose registryUrl=https://repo1.dso.mil
-    tag: 8.0.3-bb.0
+    tag: 9.6.3-bb.25
   dependsOn:
     ###ZARF_VAR_SONARQUBE_DEPENDS_ON###
   baseValues:
